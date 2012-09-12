@@ -1,5 +1,19 @@
+var map;
+
 function update() {
-  console.log("Update, yo!");
+  var radius = google.maps.geometry.spherical.computeDistanceBetween(map.getCenter(), map.getBounds().getNorthEast());
+  console.log(radius);
+  return;
+
+  params = {}
+  params['min_date'] = $('#min_date').val();
+  params['max_date'] = $('#max_date').val();
+  params['lat'] = map.getCenter().lat();
+  params['lng'] = map.getCenter().lng();
+  params['distance'] = radius;
+  $.getJSON('/photos', params, function(data, textStatus){
+    
+  });
 }
 
 $(document).ready(function(){
@@ -12,7 +26,7 @@ $(document).ready(function(){
     mapTypeId: google.maps.MapTypeId.ROADMAP
   };
 
-  var map = new google.maps.Map(document.getElementById('map'), mapOptions);
+  map = new google.maps.Map(document.getElementById('map'), mapOptions);
 
   $('.date_picker').datepicker();
 
