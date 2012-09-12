@@ -5,7 +5,7 @@ app = Flask(__name__)
 
 @app.route('/')
 def hello():
-  return file("timeandplace.html")
+  return file("timeandplace.html").read()
 
 
 
